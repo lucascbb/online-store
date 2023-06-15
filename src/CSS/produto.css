@@ -1,59 +1,67 @@
-.produto {
-  align-items: center;
-  background-color: rgb(65, 66, 64);
-  box-shadow: 2.759px 2.759px 5.518px rgba(0, 0, 0, 0.836);
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
-  height: 358.7px;
-  margin: 10px;
-  position: relative;
-  width: 279.6px;
-}
+/* stylelint-disable order/properties-alphabetical-order */
 
-.produto img {
-  height: 130px;
-  margin: auto;
-  padding-top: 5px;
-  position: relative;
-  width: 150px;
-}
+@media ( min-width : 320px ) and ( max-width : 500px ) {
 
-.produtoName {
-  color: rgb(186, 188, 191);
-  position: relative;
-  width: 200px;
-}
+  .paiProduto-Produto {
+    background-color: white;
+    border-radius: 6px;
+    height: 300px;
+    margin: 1px;
+    width: 49%;
+    padding: 0 12px;
+  }
 
-.produtoPrice {
-  color: greenyellow;
-  margin: auto;
-  padding-bottom: 20px;
-  position: relative;
-}
+  .produtoLink {
+    color: black;
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    margin-top: 1%;
+  }
 
-.produtoButton {
-  border-radius: 20px;
-  padding-bottom: 10px;
-  position: relative;
-  top: -15px;
-}
+  .produtoLink img {
+    border-radius: 6px;
+    width: 98%;
+  }
 
-.produtoButton:hover {
-  box-shadow: 0 0 8px rgb(207, 207, 207);
-}
+  .produtoName {
+    font-size: 0.8rem;
+    max-width: 100%;
+    height: 60px;
+    overflow: hidden;
 
-.frete {
-  color: greenyellow;
-  left: 60%;
-  position: absolute;
-}
+    /* stylelint-disable-next-line value-no-vendor-prefix */
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+  }
 
-.produtoLink {
-  display: flex;
-  flex-direction: column;
-  height: 300px;
-  justify-content: space-around;
-  justify-items: center;
-  text-decoration: none;
+  .produtoPrice {
+    text-align: left;
+    font-size: 1.3rem;
+  }
+
+  .produtoButton {
+    all: unset;
+    position: relative;
+    bottom: 93%;
+    left: 86%;
+    font-size: 22px;
+    color: rgba(75, 75, 75, 0.829);
+  }
+
+  .frete h4 {
+    display: flex;
+    align-items: center;
+    position: relative;
+    bottom: 50px;
+    font-size: 16px;
+    color: green;
+  }
+
+  .iconTruck-Produto {
+    font-size: 20px;
+    margin: 0 0 1px 5px;
+  }
 }

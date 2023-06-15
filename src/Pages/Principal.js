@@ -1,10 +1,15 @@
+/* eslint-disable max-lines */
+/* eslint-disable react/jsx-max-depth */
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { FaShoppingCart } from 'react-icons/fa';
+import { BsCart3 } from 'react-icons/bs';
 import { CgSearch } from 'react-icons/cg';
+import { MdMenu } from 'react-icons/md';
+import { IoMdClose } from 'react-icons/io';
 import Produto from '../components/Produto';
 import { getProductsFromCategoryAndQuery } from '../services/api';
 import Categories from '../components/Categories';
+import bussines from '../images/business.png';
 
 class Principal extends React.Component {
   constructor() {
@@ -14,11 +19,14 @@ class Principal extends React.Component {
       valor: false,
       resultadoDaBusca: {},
       quantidadeCarrinho: 0,
+      deviceType: 'mobile',
+      menu: false,
     };
   }
 
   componentDidMount() {
     this.calculaTotal();
+    this.isMobileDevice();
   }
 
   onChange = ({ target }) => {
@@ -44,6 +52,7 @@ class Principal extends React.Component {
   };
 
   getCategorieProducts = async ({ target }) => {
+    this.setState({ menu: false });
     const response = await getProductsFromCategoryAndQuery(target.id);
     const { results } = response;
     this.setState({
@@ -59,7 +68,6 @@ class Principal extends React.Component {
     }
     const novo = parseInt(antes, 10) + 1;
     localStorage.setItem(elemento, novo);
-    //-------------------
     this.calculaTotal();
   };
 
@@ -82,71 +90,185 @@ class Principal extends React.Component {
     }
   };
 
+  isMobileDevice = () => {
+    if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+      this.setState({
+        deviceType: 'mobile',
+      });
+    } else {
+      this.setState({
+        deviceType: 'desktop',
+      });
+    }
+  };
+
+  menu = () => {
+    this.setState((prevState) => ({
+      menu: !prevState.menu,
+    }));
+    console.log('oi');
+  };
+
   render() {
-    const { campoDeBusca, valor, resultadoDaBusca, quantidadeCarrinho } = this.state;
+    const { campoDeBusca, valor, resultadoDaBusca,
+      quantidadeCarrinho, deviceType, menu } = this.state;
     return (
-        <div className="principalHeader">
-          <div className="principalPesquisa">
-            <input
-              value={ campoDeBusca }
-              onChange={ this.onChange }
-              name="campoDeBusca"
-              type="text"
-              data-testid="query-input"
-            />
-            <label htmlFor="principalButton">
-              <CgSearch className="principalLupa" />
-              <button
-                id="principalButton"
-                type="button"
-                data-testid="query-button"
-                onClick={ this.handleClick }
-              >
-                button
-              </button>
-            </label>
-          </div>
-          <div className="principalDivCarrinho">
-            <Link
-              to="/cart"
-              data-testid="shopping-cart-button"
-              className="principalLinkCart"
-            >
-              <FaShoppingCart className="principalCart" />
-              <p data-testid="shopping-cart-size">{quantidadeCarrinho}</p>
-            </Link>
-          </div>
-        </div>
-        <div className="principalMain">
-          <Categories
-            getProducts={ this.getCategorieProducts }
-            className="principalCategories"
-          />
-          <div className="principalResultado">
-            <h3
-              data-testid="home-initial-message"
-            >
-              Digite algum termo de pesquisa ou escolha uma categoria.
+      <section>
+        {deviceType === 'mobile'
+          ? (
+            <>
+              <div className="pai-Header">
+                <div className="logo-search-cart-Header">
+                  <button
+                    type="button"
+                    onClick={ this.menu }
+                    className={ menu ? 'btnMenu-Header' : 'btnMenu-Header2' }
+                  >
+                    {menu
+                      ? (
+                        <IoMdClose className="iconMenu-Header" />
+                      ) : (
+                        <MdMenu className="iconMenu-Header" />
+                      )}
+                  </button>
 
-            </h3>
-            <div className="principalProdutos">
+                  <div className="logo-Header">
+                    <img src={ bussines } alt="logo" />
+                  </div>
 
-              {valor ? resultadoDaBusca.results.map((ele) => (
-                <Produto
-                  // getCartItens={ this.getCartItens }
-                  objItem={ ele }
-                  key={ ele.title }
-                  productName={ ele.title }
-                  productPrice={ ele.price }
-                  productImage={ ele.thumbnail }
-                  productId={ ele.id }
-                  freeShipping={ ele.shipping.free_shipping }
-                  salvarQuantidade={ this.salvarQuantidade }
-                />)) : <p>Nenhum produto foi encontrado</p> }
-            </div>
-          </div>
-        </div>
-      </div>
+                  <div className="cart-Header">
+                    <Link
+                      to="/cart"
+                      data-testid="shopping-cart-button"
+                    >
+                      {!menu ? <BsCart3 className="iconCart-Header" /> : null}
+                      {quantidadeCarrinho > 0
+                        ? (
+                          <p data-testid="shopping-cart-size" className="numCart-Header">
+                            {quantidadeCarrinho}
+                          </p>
+                        ) : null}
+                    </Link>
+                  </div>
+
+                </div>
+
+                <div className="search-Header">
+                  <label htmlFor="principalButton" className="label-Header">
+                    <input
+                      value={ campoDeBusca }
+                      onChange={ this.onChange }
+                      name="campoDeBusca"
+                      placeholder="Busca aqui"
+                      type="text"
+                      data-testid="query-input"
+                      id="principalButton"
+                    />
+                    <button
+                      id="principalButton"
+                      type="button"
+                      data-testid="query-button"
+                      onClick={ this.handleClick }
+                    >
+                      <CgSearch />
+                    </button>
+                  </label>
+                </div>
+              </div>
+              <div>
+                <Categories
+                  open={ menu }
+                  getProducts={ this.getCategorieProducts }
+                />
+                <div className="principalResultado">
+                  {/* <h3 data-testid="home-initial-message">
+                    Digite algum termo de pesquisa ou escolha uma categoria.
+                  </h3> */}
+                  <div className="principalProdutos">
+                    {valor ? resultadoDaBusca.results.map((ele) => (
+                      <Produto
+                        getCartItens={ this.getCartItens }
+                        objItem={ ele }
+                        key={ ele.title }
+                        productName={ ele.title }
+                        productPrice={ ele.price }
+                        productImage={ ele.thumbnail }
+                        productId={ ele.id }
+                        freeShipping={ ele.shipping.free_shipping }
+                        salvarQuantidade={ this.salvarQuantidade }
+                      />)) : (null)}
+                  </div>
+                </div>
+              </div>
+
+            </>
+          ) : (
+            <>
+              <div className="logo-search-cart-Header">
+                { /* DIV 1  logo */}
+                <div><img src={ bussines } alt="logo" width="60px" /></div>
+                { /* DIV 2 label pesquisa */}
+                <div className="search-Header">
+                  <label htmlFor="principalButton" className="input-group mb-3">
+                    <input
+                      value={ campoDeBusca }
+                      onChange={ this.onChange }
+                      name="campoDeBusca"
+                      type="text"
+                      data-testid="query-input"
+                      id="principalButton"
+                      className="form-control"
+                    />
+                    <button
+                      id="principalButton"
+                      type="button"
+                      data-testid="query-button"
+                      onClick={ this.handleClick }
+                      className="btn btn-outline-secondary"
+                    >
+                      <CgSearch />
+                    </button>
+                  </label>
+                </div>
+                { /* DIV 3  carrinho */}
+                <div>
+                  <Link
+                    to="/cart"
+                    data-testid="shopping-cart-button"
+                  >
+                    <BsCart3 />
+                    <p data-testid="shopping-cart-size">{quantidadeCarrinho}</p>
+                  </Link>
+                </div>
+              </div>
+              <div className="principalMain">
+                <Categories
+                  getProducts={ this.getCategorieProducts }
+                  className="principalCategories"
+                />
+                <div className="principalResultado">
+                  <h3 data-testid="home-initial-message">
+                    Digite algum termo de pesquisa ou escolha uma categoria.
+                  </h3>
+                  <div className="principalProdutos">
+                    {valor ? resultadoDaBusca.results.map((ele) => (
+                      <Produto
+                        getCartItens={ this.getCartItens }
+                        objItem={ ele }
+                        key={ ele.title }
+                        productName={ ele.title }
+                        productPrice={ ele.price }
+                        productImage={ ele.thumbnail }
+                        productId={ ele.id }
+                        freeShipping={ ele.shipping.free_shipping }
+                        salvarQuantidade={ this.salvarQuantidade }
+                      />)) : <p>Nenhum produto foi encontrado</p>}
+                  </div>
+                </div>
+              </div>
+            </>
+          ) }
+      </section>
     );
   }
 }

@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { GrFormNextLink } from 'react-icons/gr';
 import { getCategories } from '../services/api';
 
 class Categories extends React.Component {
@@ -21,10 +22,10 @@ class Categories extends React.Component {
 
   render() {
     const { categoriesList } = this.state;
-    const { getProducts } = this.props;
+    const { getProducts, open } = this.props;
     return (
-      <div className="categories">
-        <h1>Categorias:</h1>
+      <div className={ open ? 'menuOpen-Header' : 'menuClosed-Header' }>
+        <h1>Categorias</h1>
         {categoriesList.map((categorie) => (
           <button
             className="categorieButton"
@@ -35,7 +36,11 @@ class Categories extends React.Component {
             onClick={ getProducts }
           >
             {categorie.name}
-
+            <GrFormNextLink
+              className="iconArrow-Header"
+              onClick={ getProducts }
+              id={ categorie.id }
+            />
           </button>
         ))}
       </div>
@@ -45,6 +50,7 @@ class Categories extends React.Component {
 
 Categories.propTypes = {
   getProducts: PropTypes.func.isRequired,
+  open: PropTypes.bool.isRequired,
 };
 
 export default Categories;
