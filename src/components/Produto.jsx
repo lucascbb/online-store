@@ -27,15 +27,6 @@ class Produto extends React.Component {
 
     return (
       <div data-testid="product" className="paiProduto-Produto">
-        <Link
-          className="produtoLink"
-          to={ `/produtoDetalhado/${productId}` }
-          data-testid="product-detail-link"
-        >
-          <img src={ productImage } alt={ productName } />
-          <p className="produtoName">{ productName }</p>
-          <p className="produtoPrice">{`R$ ${productPrice}` }</p>
-        </Link>
         <button
           className="produtoButton"
           data-testid="product-add-to-cart"
@@ -50,8 +41,17 @@ class Produto extends React.Component {
             salvarQuantidade(idQuantidade);
           } }
         >
-          <FaCartPlus />
+          <FaCartPlus className="cartADD" />
         </button>
+        <Link
+          className="produtoLink"
+          to={ `/produtoDetalhado/${productId}` }
+          data-testid="product-detail-link"
+        >
+          <img src={ productImage } alt={ productName } />
+          <p className="produtoName">{ productName }</p>
+          <p className="produtoPrice">{`R$ ${productPrice}` }</p>
+        </Link>
         <div
           className="frete"
         >

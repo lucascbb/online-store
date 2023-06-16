@@ -7,8 +7,9 @@ import { CgSearch } from 'react-icons/cg';
 import { MdMenu } from 'react-icons/md';
 import { IoMdClose } from 'react-icons/io';
 import Produto from '../components/Produto';
-import { getProductsFromCategoryAndQuery } from '../services/api';
+import { getProductSale, getProductsFromCategoryAndQuery } from '../services/api';
 import Categories from '../components/Categories';
+import Carrousel from '../components/Carrousel';
 import bussines from '../images/business.png';
 
 class Principal extends React.Component {
@@ -27,7 +28,23 @@ class Principal extends React.Component {
   componentDidMount() {
     this.calculaTotal();
     this.isMobileDevice();
+    this.produtosRelevantes();
   }
+
+  produtosRelevantes = async () => {
+    const cinqueta = 50;
+    randomNum = Math.floor(Math.random() * cinqueta);
+    // const cabelos = await getProductSale('MLB1246');
+    // console.log(cabelos.results);
+    // const livros = await getProductSale('MLB1196');
+    // console.log(livros.results);
+    // const esporte = await getProductSale('MLB1276');
+    // console.log(esporte.results);
+    // const carro = await getProductSale('MLB1743');
+    // console.log(carro.results);
+    // const comida = await getProductSale('MLB410883');
+    // console.log(comida.results[0]);
+  };
 
   onChange = ({ target }) => {
     const { name, value } = target;
@@ -54,7 +71,9 @@ class Principal extends React.Component {
   getCategorieProducts = async ({ target }) => {
     this.setState({ menu: false });
     const response = await getProductsFromCategoryAndQuery(target.id);
+    console.log(target.id);
     const { results } = response;
+    console.log(results);
     this.setState({
       valor: true,
       resultadoDaBusca: { results },
@@ -196,11 +215,10 @@ class Principal extends React.Component {
                         productId={ ele.id }
                         freeShipping={ ele.shipping.free_shipping }
                         salvarQuantidade={ this.salvarQuantidade }
-                      />)) : (null)}
+                      />)) : (<Carrousel getProducts={ this.getCategorieProducts } />)}
                   </div>
                 </div>
               </div>
-
             </>
           ) : (
             <>
