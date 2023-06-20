@@ -1,0 +1,13 @@
+.main-loading {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  top: 10px;
+}
+
+.main-loading p {
+  font-size: 20px;
+  margin: 15px 0;
+}

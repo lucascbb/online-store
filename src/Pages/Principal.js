@@ -6,11 +6,13 @@ import { BsCart3 } from 'react-icons/bs';
 import { CgSearch } from 'react-icons/cg';
 import { MdMenu } from 'react-icons/md';
 import { IoMdClose } from 'react-icons/io';
+import { getProductsFromCategoryAndQuery } from '../services/api';
 import Produto from '../components/Produto';
-import { getProductSale, getProductsFromCategoryAndQuery } from '../services/api';
 import Categories from '../components/Categories';
 import Carrousel from '../components/Carrousel';
 import bussines from '../images/business.png';
+import Loading from '../components/Loading';
+import DestaquedoDia from '../components/DestaquedoDia';
 
 class Principal extends React.Component {
   constructor() {
@@ -22,29 +24,14 @@ class Principal extends React.Component {
       quantidadeCarrinho: 0,
       deviceType: 'mobile',
       menu: false,
+      listSales: [],
     };
   }
 
   componentDidMount() {
     this.calculaTotal();
     this.isMobileDevice();
-    this.produtosRelevantes();
   }
-
-  produtosRelevantes = async () => {
-    const cinqueta = 50;
-    randomNum = Math.floor(Math.random() * cinqueta);
-    // const cabelos = await getProductSale('MLB1246');
-    // console.log(cabelos.results);
-    // const livros = await getProductSale('MLB1196');
-    // console.log(livros.results);
-    // const esporte = await getProductSale('MLB1276');
-    // console.log(esporte.results);
-    // const carro = await getProductSale('MLB1743');
-    // console.log(carro.results);
-    // const comida = await getProductSale('MLB410883');
-    // console.log(comida.results[0]);
-  };
 
   onChange = ({ target }) => {
     const { name, value } = target;
@@ -69,22 +56,18 @@ class Principal extends React.Component {
   };
 
   getCategorieProducts = async ({ target }) => {
-    this.setState({ menu: false });
     const response = await getProductsFromCategoryAndQuery(target.id);
-    console.log(target.id);
     const { results } = response;
-    console.log(results);
     this.setState({
       valor: true,
       resultadoDaBusca: { results },
+      menu: false,
     });
   };
 
   salvarQuantidade = (elemento) => {
     let antes = localStorage.getItem(elemento);
-    if (antes === null) {
-      antes = 0;
-    }
+    if (antes === null) { antes = 0; }
     const novo = parseInt(antes, 10) + 1;
     localStorage.setItem(elemento, novo);
     this.calculaTotal();
@@ -122,15 +105,12 @@ class Principal extends React.Component {
   };
 
   menu = () => {
-    this.setState((prevState) => ({
-      menu: !prevState.menu,
-    }));
-    console.log('oi');
+    this.setState((prevState) => ({ menu: !prevState.menu }));
   };
 
   render() {
     const { campoDeBusca, valor, resultadoDaBusca,
-      quantidadeCarrinho, deviceType, menu } = this.state;
+      quantidadeCarrinho, deviceType, menu, listSales } = this.state;
     return (
       <section>
         {deviceType === 'mobile'
@@ -169,7 +149,6 @@ class Principal extends React.Component {
                         ) : null}
                     </Link>
                   </div>
-
                 </div>
 
                 <div className="search-Header">
@@ -200,9 +179,6 @@ class Principal extends React.Component {
                   getProducts={ this.getCategorieProducts }
                 />
                 <div className="principalResultado">
-                  {/* <h3 data-testid="home-initial-message">
-                    Digite algum termo de pesquisa ou escolha uma categoria.
-                  </h3> */}
                   <div className="principalProdutos">
                     {valor ? resultadoDaBusca.results.map((ele) => (
                       <Produto
@@ -215,7 +191,13 @@ class Principal extends React.Component {
                         productId={ ele.id }
                         freeShipping={ ele.shipping.free_shipping }
                         salvarQuantidade={ this.salvarQuantidade }
-                      />)) : (<Carrousel getProducts={ this.getCategorieProducts } />)}
+                      />))
+                      : (
+                        <>
+                          <Carrousel getProducts={ this.getCategorieProducts } />
+                          <DestaquedoDia />
+                        </>
+                      )}
                   </div>
                 </div>
               </div>
@@ -269,7 +251,7 @@ class Principal extends React.Component {
                     Digite algum termo de pesquisa ou escolha uma categoria.
                   </h3>
                   <div className="principalProdutos">
-                    {valor ? resultadoDaBusca.results.map((ele) => (
+                    {/* {valor ? resultadoDaBusca.results.map((ele) => (
                       <Produto
                         getCartItens={ this.getCartItens }
                         objItem={ ele }
@@ -280,7 +262,7 @@ class Principal extends React.Component {
                         productId={ ele.id }
                         freeShipping={ ele.shipping.free_shipping }
                         salvarQuantidade={ this.salvarQuantidade }
-                      />)) : <p>Nenhum produto foi encontrado</p>}
+                      />)) : <p>Nenhum produto foi encontrado</p>} */}
                   </div>
                 </div>
               </div>

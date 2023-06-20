@@ -32,22 +32,17 @@ class Carrousel extends React.Component {
       slidesToShow: 1,
       slidesToScroll: 1,
       swipeToSlide: true,
+      autoplay: true,
+      autoplaySpeed: 3000,
       responsive: [
         {
-          breakpoint: 500, // Tamanho da tela em que você deseja alterar as configurações
-          settings: {
-            slidesToShow: 1, // Quantidade de slides a serem mostrados no formato mobile
-            slidesToScroll: 1,
-          },
-        },
-        {
-          breakpoint: 490,
+          breakpoint: 500,
           settings: {
             slidesToShow: 1,
             slidesToScroll: 1,
           },
         },
-      ], // Permite arrastar para passar os slides
+      ],
     };
     const { imgArray } = this.state;
     const { getProducts } = this.props;
