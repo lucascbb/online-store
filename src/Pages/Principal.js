@@ -1,79 +1,48 @@
-/* eslint-disable max-lines */
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/jsx-max-depth */
-import React from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { BsCart3 } from 'react-icons/bs';
 import { CgSearch } from 'react-icons/cg';
-import { MdMenu } from 'react-icons/md';
-import { IoMdClose } from 'react-icons/io';
 import { getProductsFromCategoryAndQuery } from '../services/api';
+import ShopContext from '../ShopContext';
 import Produto from '../components/Produto';
 import Categories from '../components/Categories';
 import Carrousel from '../components/Carrousel';
 import bussines from '../images/business.png';
-import Loading from '../components/Loading';
 import DestaquedoDia from '../components/DestaquedoDia';
+import Header from '../components/Header';
+import Historico from '../components/Historico';
 
-class Principal extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      campoDeBusca: '',
-      valor: false,
-      resultadoDaBusca: {},
-      quantidadeCarrinho: 0,
-      deviceType: 'mobile',
-      menu: false,
-      listSales: [],
-    };
-  }
+function Principal() {
+  const [campoDeBusca, setCampoDeBusca] = useState('');
+  const [quantidadeCarrinho, setQuantidadeCarrinho] = useState(0);
+  const [deviceType, setDeviceType] = useState('mobile');
+  const { resultado, setResultado, valor,
+    setValor, nenhumResultado } = useContext(ShopContext);
 
-  componentDidMount() {
-    this.calculaTotal();
-    this.isMobileDevice();
-  }
-
-  onChange = ({ target }) => {
-    const { name, value } = target;
-    this.setState({
-      [name]: value,
-    });
+  const onChange = ({ target }) => {
+    const { value } = target;
+    setCampoDeBusca(value);
   };
 
-  handleClick = async () => {
-    const { campoDeBusca } = this.state;
+  const handleClick = async () => {
     const categories = await getProductsFromCategoryAndQuery(false, campoDeBusca);
     if (!categories) {
-      this.setState({
-        valor: false,
-      });
+      setValor(false);
     } else {
-      this.setState({
-        valor: true,
-        resultadoDaBusca: categories,
-      });
+      setValor(true);
+      setResultado(categories.results);
     }
   };
 
-  getCategorieProducts = async ({ target }) => {
+  const getCategorieProducts = async ({ target }) => {
     const response = await getProductsFromCategoryAndQuery(target.id);
-    const { results } = response;
-    this.setState({
-      valor: true,
-      resultadoDaBusca: { results },
-      menu: false,
-    });
+    setValor(true);
+    setResultado(response.results);
   };
 
-  salvarQuantidade = (elemento) => {
-    let antes = localStorage.getItem(elemento);
-    if (antes === null) { antes = 0; }
-    const novo = parseInt(antes, 10) + 1;
-    localStorage.setItem(elemento, novo);
-    this.calculaTotal();
-  };
-
-  calculaTotal = () => {
+  const calculaTotal = () => {
     const listaDeItens = JSON.parse(localStorage.getItem('product'));
     if (listaDeItens != null) {
       const setArray = new Set();
@@ -88,189 +57,130 @@ class Principal extends React.Component {
         acc += Number(quantidade);
         return acc;
       }, 0);
-      this.setState({ quantidadeCarrinho: soma });
+      setQuantidadeCarrinho(soma);
     }
   };
 
-  isMobileDevice = () => {
+  const salvarQuantidade = (elemento) => {
+    let antes = localStorage.getItem(elemento);
+    if (antes === null) { antes = 0; }
+    const novo = parseInt(antes, 10) + 1;
+    localStorage.setItem(elemento, novo);
+    calculaTotal();
+  };
+
+  const isMobileDevice = () => {
     if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-      this.setState({
-        deviceType: 'mobile',
-      });
+      setDeviceType('mobile');
     } else {
-      this.setState({
-        deviceType: 'desktop',
-      });
+      setDeviceType('desktop');
     }
   };
 
-  menu = () => {
-    this.setState((prevState) => ({ menu: !prevState.menu }));
-  };
+  useEffect(() => {
+    calculaTotal();
+    isMobileDevice();
+    setValor(false);
+  }, []);
 
-  render() {
-    const { campoDeBusca, valor, resultadoDaBusca,
-      quantidadeCarrinho, deviceType, menu, listSales } = this.state;
-    return (
-      <section>
-        {deviceType === 'mobile'
-          ? (
-            <>
-              <div className="pai-Header">
-                <div className="logo-search-cart-Header">
-                  <button
-                    type="button"
-                    onClick={ this.menu }
-                    className={ menu ? 'btnMenu-Header' : 'btnMenu-Header2' }
-                  >
-                    {menu
-                      ? (
-                        <IoMdClose className="iconMenu-Header" />
-                      ) : (
-                        <MdMenu className="iconMenu-Header" />
-                      )}
-                  </button>
+  useEffect(() => {
+    console.log(nenhumResultado);
+  }, [nenhumResultado]);
 
-                  <div className="logo-Header">
-                    <img src={ bussines } alt="logo" />
-                  </div>
-
-                  <div className="cart-Header">
-                    <Link
-                      to="/cart"
-                      data-testid="shopping-cart-button"
-                    >
-                      {!menu ? <BsCart3 className="iconCart-Header" /> : null}
-                      {quantidadeCarrinho > 0
-                        ? (
-                          <p data-testid="shopping-cart-size" className="numCart-Header">
-                            {quantidadeCarrinho}
-                          </p>
-                        ) : null}
-                    </Link>
-                  </div>
-                </div>
-
-                <div className="search-Header">
-                  <label htmlFor="principalButton" className="label-Header">
-                    <input
-                      value={ campoDeBusca }
-                      onChange={ this.onChange }
-                      name="campoDeBusca"
-                      placeholder="Busca aqui"
-                      type="text"
-                      data-testid="query-input"
-                      id="principalButton"
-                    />
-                    <button
-                      id="principalButton"
-                      type="button"
-                      data-testid="query-button"
-                      onClick={ this.handleClick }
-                    >
-                      <CgSearch />
-                    </button>
-                  </label>
-                </div>
+  return (
+    <section>
+      {deviceType === 'mobile' ? (
+        <>
+          <Header />
+          <div>
+            <div className="principalResultado">
+              <div className="principalProdutos">
+                {valor ? resultado.map((ele) => (
+                  <Produto
+                    objItem={ ele }
+                    key={ ele.id }
+                    productName={ ele.title }
+                    productPrice={ ele.price }
+                    productImage={ ele.thumbnail }
+                    productId={ ele.id }
+                    freeShipping={ ele.shipping.free_shipping }
+                    categoryId={ ele.category_id }
+                    salvarQuantidade={ salvarQuantidade }
+                  />
+                ))
+                  : (
+                    <>
+                      <Carrousel getProducts={ getCategorieProducts } />
+                      <DestaquedoDia />
+                      {localStorage.getItem('historico') ? <Historico /> : null}
+                    </>
+                  )}
               </div>
-              <div>
-                <Categories
-                  open={ menu }
-                  getProducts={ this.getCategorieProducts }
+            </div>
+          </div>
+        </>
+      ) : (
+        <>
+          <div className="logo-search-cart-Header">
+            <div><img src={ bussines } alt="logo" width="60px" /></div>
+            <div className="search-Header">
+              <label htmlFor="principalButton" className="input-group mb-3">
+                <input
+                  value={ campoDeBusca }
+                  onChange={ onChange }
+                  name="campoDeBusca"
+                  type="text"
+                  data-testid="query-input"
+                  id="principalButton"
+                  className="form-control"
                 />
-                <div className="principalResultado">
-                  <div className="principalProdutos">
-                    {valor ? resultadoDaBusca.results.map((ele) => (
-                      <Produto
-                        getCartItens={ this.getCartItens }
-                        objItem={ ele }
-                        key={ ele.title }
-                        productName={ ele.title }
-                        productPrice={ ele.price }
-                        productImage={ ele.thumbnail }
-                        productId={ ele.id }
-                        freeShipping={ ele.shipping.free_shipping }
-                        salvarQuantidade={ this.salvarQuantidade }
-                      />))
-                      : (
-                        <>
-                          <Carrousel getProducts={ this.getCategorieProducts } />
-                          <DestaquedoDia />
-                        </>
-                      )}
-                  </div>
-                </div>
+                <button
+                  id="principalButton"
+                  type="button"
+                  data-testid="query-button"
+                  onClick={ handleClick }
+                  className="btn btn-outline-secondary"
+                >
+                  <CgSearch />
+                </button>
+              </label>
+            </div>
+            <div>
+              <Link to="/cart" data-testid="shopping-cart-button">
+                <BsCart3 />
+                <p data-testid="shopping-cart-size">{quantidadeCarrinho}</p>
+              </Link>
+            </div>
+          </div>
+          <div className="principalMain">
+            <Categories
+              getProducts={ getCategorieProducts }
+              className="principalCategories"
+            />
+            <div className="principalResultado">
+              <h3 data-testid="home-initial-message">
+                Digite algum termo de pesquisa ou escolha uma categoria.
+              </h3>
+              <div className="principalProdutos">
+                {/* {valor ? resultadoDaBusca.results.map((ele) => (
+                  <Produto
+                    getCartItens={ this.getCartItens }
+                    objItem={ ele }
+                    key={ ele.title }
+                    productName={ ele.title }
+                    productPrice={ ele.price }
+                    productImage={ ele.thumbnail }
+                    productId={ ele.id }
+                    freeShipping={ ele.shipping.free_shipping }
+                    salvarQuantidade={ this.salvarQuantidade }
+                  />)) : <p>Nenhum produto foi encontrado</p>} */}
               </div>
-            </>
-          ) : (
-            <>
-              <div className="logo-search-cart-Header">
-                { /* DIV 1  logo */}
-                <div><img src={ bussines } alt="logo" width="60px" /></div>
-                { /* DIV 2 label pesquisa */}
-                <div className="search-Header">
-                  <label htmlFor="principalButton" className="input-group mb-3">
-                    <input
-                      value={ campoDeBusca }
-                      onChange={ this.onChange }
-                      name="campoDeBusca"
-                      type="text"
-                      data-testid="query-input"
-                      id="principalButton"
-                      className="form-control"
-                    />
-                    <button
-                      id="principalButton"
-                      type="button"
-                      data-testid="query-button"
-                      onClick={ this.handleClick }
-                      className="btn btn-outline-secondary"
-                    >
-                      <CgSearch />
-                    </button>
-                  </label>
-                </div>
-                { /* DIV 3  carrinho */}
-                <div>
-                  <Link
-                    to="/cart"
-                    data-testid="shopping-cart-button"
-                  >
-                    <BsCart3 />
-                    <p data-testid="shopping-cart-size">{quantidadeCarrinho}</p>
-                  </Link>
-                </div>
-              </div>
-              <div className="principalMain">
-                <Categories
-                  getProducts={ this.getCategorieProducts }
-                  className="principalCategories"
-                />
-                <div className="principalResultado">
-                  <h3 data-testid="home-initial-message">
-                    Digite algum termo de pesquisa ou escolha uma categoria.
-                  </h3>
-                  <div className="principalProdutos">
-                    {/* {valor ? resultadoDaBusca.results.map((ele) => (
-                      <Produto
-                        getCartItens={ this.getCartItens }
-                        objItem={ ele }
-                        key={ ele.title }
-                        productName={ ele.title }
-                        productPrice={ ele.price }
-                        productImage={ ele.thumbnail }
-                        productId={ ele.id }
-                        freeShipping={ ele.shipping.free_shipping }
-                        salvarQuantidade={ this.salvarQuantidade }
-                      />)) : <p>Nenhum produto foi encontrado</p>} */}
-                  </div>
-                </div>
-              </div>
-            </>
-          ) }
-      </section>
-    );
-  }
+            </div>
+          </div>
+        </>
+      )}
+    </section>
+  );
 }
 
 export default Principal;

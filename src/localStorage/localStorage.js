@@ -9,4 +9,3 @@ export function filtraOsProdutos(productId, productLength) {
 }
 
 export function quantity(productId) { return localStorage.getItem(productId); }
-// export default { SalvaProduto, recuperaProdutos };

@@ -6,55 +6,58 @@ import Loading from './Loading';
 import { formatNumber } from '../Helpers/formatPrice';
 import '../CSS/destaquedoDia.css';
 
-class DestaquedoDia extends React.Component {
+class Historico extends React.Component {
   constructor() {
     super();
     this.state = {
       listSales: '',
+      categoryId: '',
     };
   }
 
   componentDidMount() {
-    this.produtosRelevantes();
+    this.produtosPesquisados();
   }
 
-  produtosRelevantes = async () => {
-    const cinqueta = 50;
-    const randomNum = Math.floor(Math.random() * cinqueta);
+  produtosPesquisados = async () => {
+    const categoryId = localStorage.getItem('historico');
 
-    const cabelos = await getProductSale('MLB1246');
-    const livros = await getProductSale('MLB1196');
-    const esporte = await getProductSale('MLB1276');
-    const carro = await getProductSale('MLB1743');
-    const comida = await getProductSale('MLB410883');
+    const cinqueta = 50;
+    const randomNum1 = Math.floor(Math.random() * cinqueta);
+    const randomNum2 = Math.floor(Math.random() * cinqueta);
+    const randomNum3 = Math.floor(Math.random() * cinqueta);
+    const randomNum4 = Math.floor(Math.random() * cinqueta);
+    const randomNum5 = Math.floor(Math.random() * cinqueta);
+
+    const hisotrico = await getProductSale(categoryId);
 
     const listSales = [
-      comida.results[randomNum],
-      cabelos.results[randomNum],
-      livros.results[randomNum],
-      esporte.results[randomNum],
-      carro.results[randomNum],
+      hisotrico.results[randomNum1],
+      hisotrico.results[randomNum2],
+      hisotrico.results[randomNum3],
+      hisotrico.results[randomNum4],
+      hisotrico.results[randomNum5],
     ];
 
     this.setState({
       listSales,
+      categoryId,
     });
   };
 
   render() {
-    const { listSales } = this.state;
+    const { listSales, categoryId } = this.state;
 
     return (
       <section className="main-DestaquedoDia">
-        <h3>Destaques do dia</h3>
+        <h3>Baseado nas suas visitas</h3>
         <article className="lista-DestaquedoDia">
-          {listSales.length <= 0 ? <Loading />
-            : listSales.map((product) => (
+          {listSales[0] === undefined || categoryId === null ? <Loading />
+            : listSales.map((product, index) => (
               <Link
                 to={ `/produtoDetalhado/${product.id}` }
-                key={ product.id }
+                key={ index }
                 className="cada-DestaquedoDia"
-                onClick={ () => localStorage.setItem('historico', product.category_id) }
               >
                 <img src={ product.thumbnail } alt={ product.title } />
                 <article>
@@ -78,4 +81,4 @@ class DestaquedoDia extends React.Component {
   }
 }
 
-export default DestaquedoDia;
+export default Historico;

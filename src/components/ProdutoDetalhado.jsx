@@ -6,6 +6,7 @@ import FormComentarios from './FormComentarios';
 import {
   SalvaProduto,
   recuperaProdutos } from '../localStorage/localStorage';
+import Header from './Header';
 
 class ProdutoDetalhado extends React.Component {
   constructor() {
@@ -30,6 +31,9 @@ class ProdutoDetalhado extends React.Component {
 
     const idQuantidade = `quantidade:${product[0].id}`;
     this.salvarQuantidade(idQuantidade);
+
+    const res = localStorage.getItem('quantidade');
+    localStorage.setItem('quantidade', Number(res) + 1);
 
     // console.log(product[0].thumbnail_id);
     // this.salvarQuantidade(product[0].thumbnail_id);
@@ -62,7 +66,6 @@ class ProdutoDetalhado extends React.Component {
     }
     const novo = parseInt(antes, 10) + 1;
     localStorage.setItem(elemento, novo);
-    //---------------------
     this.calculaTotal();
   };
 
@@ -90,6 +93,10 @@ class ProdutoDetalhado extends React.Component {
     const { product, loading, id, quantidadeCarrinho } = this.state;
     return (
       <div>
+        <Header />
+        <Link to="/" data-testid="shopping-cart-button">
+          <p>Voltar</p>
+        </Link>
         {loading ? <p>Carregando...</p>
           : product.map((element, index) => (
             <div key={ index }>

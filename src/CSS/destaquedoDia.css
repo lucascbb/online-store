@@ -1,3 +1,4 @@
+/* stylelint-disable value-no-vendor-prefix */
 .main-DestaquedoDia {
   align-items: center;
   background-color: white;
@@ -17,7 +18,9 @@
 .cada-DestaquedoDia {
   align-items: center;
   border-bottom: 1px solid rgb(244, 244, 244);
+  color: black;
   display: flex;
+  text-decoration: none;
 }
 
 .cada-DestaquedoDia:first-child {
@@ -45,7 +48,7 @@
   display: flex;
   font-size: 14px;
   position: absolute;
-  right: 90px;
+  right: 20px;
   top: 30px;
   width: 100px;
 }
@@ -56,10 +59,11 @@
 }
 
 .title-DestaquedoDia {
+  -webkit-box-orient: vertical;
+  display: -webkit-box;
   font-size: 12px;
-  height: 30px;
+  -webkit-line-clamp: 2;
   overflow: hidden;
-  text-overflow: ellipsis;
 }
 
 .price-DestaquedoDia {

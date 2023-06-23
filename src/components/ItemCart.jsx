@@ -6,16 +6,10 @@ class ItemCart extends React.Component {
     super();
     this.state = {
       quantidade: 1,
-      btnDisabled: false,
-      btnNegative: false,
     };
   }
 
   componentDidMount() {
-    const { cartItensArray } = this.props;
-    if (cartItensArray.available_quantity === 1) {
-      this.setState({ btnDisabled: true, btnNegative: true });
-    } else { this.setState({ btnDisabled: false }); }
     this.recuperarQuantidade();
   }
 
@@ -30,31 +24,29 @@ class ItemCart extends React.Component {
   };
 
   aumentar = () => {
-    const { cartItensArray, calculaTotaldoCarrinho } = this.props;
-    const { quantidade } = this.state;
     this.setState(
       (prevState) => ({ quantidade: prevState.quantidade + 1 }),
       this.salvarLocalStorage,
     );
 
-    if (cartItensArray.available_quantity <= (quantidade + 1)) {
-      this.setState({ btnDisabled: true });
-    }
+    const res = localStorage.getItem('quantidade');
+    localStorage.setItem('quantidade', Number(res) + 1);
     calculaTotaldoCarrinho();
   };
 
   diminuir = () => {
-    const { cartItensArray, calculaTotaldoCarrinho } = this.props;
-    const { quantidade } = this.state;
     this.setState((prevState) => {
       if (prevState.quantidade <= 1) {
         return { quantidade: 1 };
       }
       return { quantidade: prevState.quantidade - 1 };
     }, this.salvarLocalStorage);
-    if (cartItensArray.available_quantity > (quantidade - 1)) {
-      this.setState({ btnDisabled: false });
+
+    const res = localStorage.getItem('quantidade');
+    if (res >= 2) {
+      localStorage.setItem('quantidade', Number(res) - 1);
     }
+
     calculaTotaldoCarrinho();
   };
 
@@ -66,54 +58,52 @@ class ItemCart extends React.Component {
     localStorage.setItem(`quantidade:${id}`, Number(quantidade));
   };
 
+  remove = (id) => {
+    const { removeItem } = this.props;
+    const { quantidade } = this.state;
+    removeItem(id);
+    const res = localStorage.getItem('quantidade');
+    localStorage.setItem('quantidade', Number(res) - quantidade);
+  };
+
   render() {
-    const { cartItensArray, removeItem } = this.props;
+    const { cartItensArray } = this.props;
     const { title, price, thumbnail, id } = cartItensArray;
-    const { quantidade, btnDisabled, btnNegative } = this.state;
+    const { quantidade } = this.state;
 
     return (
       <div className="ItemCartDivPrincipal">
         <div className="ItemCartDivRemoveButton">
           <button
-            onClick={ () => { removeItem(id); } }
+            onClick={ () => { this.remove(id); } }
             data-testid="remove-product"
             type="button"
-
           >
             X
-
           </button>
         </div>
         <img src={ thumbnail } alt={ title } />
         <div className="ItemCartTitleDiv">
           <p data-testid="shopping-cart-product-name">{title}</p>
         </div>
-
         <div className="ItemCartDivButtons">
-
           <button
             onClick={ () => { this.diminuir(); } }
             data-testid="product-decrease-quantity"
             type="button"
-            disabled={ btnNegative }
           >
             -
-
           </button>
           <p data-testid="shopping-cart-product-quantity">
             {quantidade}
-
           </p>
           <button
             onClick={ () => { this.aumentar(); } }
             data-testid="product-increase-quantity"
             type="button"
-            disabled={ btnDisabled }
           >
             +
-
           </button>
-
         </div>
         <div className="ItemCartDivPrice">
           <p>
@@ -121,7 +111,6 @@ class ItemCart extends React.Component {
               'pt-br',
               { style: 'currency', currency: 'BRL' },
             )}`}
-
           </p>
         </div>
       </div>
@@ -137,13 +126,9 @@ ItemCart.propTypes = {
     id: propTypes.string,
     thumbnail_id: propTypes.string,
     available_quantity: propTypes.number,
-  }).isRequired,
-  // increaseItem: propTypes.func.isRequired,
-  // decreaseItem: propTypes.func.isRequired,
-  removeItem: propTypes.func.isRequired,
-  calculaTotaldoCarrinho: propTypes.func.isRequired,
-  // quantity: propTypes.number.isRequired,
-
-};
+  }),
+  removeItem: propTypes.func,
+  calculaTotaldoCarrinho: propTypes.func,
+}.isRequired;
 
 export default ItemCart;

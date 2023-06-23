@@ -7,17 +7,7 @@ import Checkout from './Pages/Checkout';
 // import { recuperaProdutos } from './localStorage/localStorage';
 
 class Router extends React.Component {
-  // getCartItensArray = (itemObj) => {
-  //   const { cartItensArray } = this.state;
-  //   const arrayObjItens = [...cartItensArray];
-  //   arrayObjItens.push(itemObj);
-  //   this.setState({
-  //     cartItensArray: arrayObjItens,
-  //   });
-  // };
-
   render() {
-    // const { cartItensArray } = this.state;
     return (
       <Switch>
         <Route

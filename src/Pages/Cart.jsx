@@ -4,7 +4,8 @@ import { Link } from 'react-router-dom';
 import ItemCart from '../components/ItemCart';
 import { recuperaProdutos } from '../localStorage/localStorage';
 import arroyBack from '../CSS/images/icon _arrow back_.png';
-import logo from '../CSS/images/logo.png';
+// import logo from '../CSS/images/logo.png';
+import Header from '../components/Header';
 
 class Cart extends React.Component {
   constructor() {
@@ -30,7 +31,6 @@ class Cart extends React.Component {
     if (!quantidade < 1) {
       localStorage.setItem(productID, quantidade);
       this.forceUpdate();
-
       // this.setState({ teste: true });
     }
   };
@@ -103,7 +103,7 @@ class Cart extends React.Component {
     const { temAlgo, cartArrayFiltred, total } = this.state;
     return (
       <div>
-        <header className="Cart-Header"><img src={ logo } alt="" /></header>
+        <Header />
         <Link
           to="/"
           className="CartLinkBack"
@@ -130,8 +130,9 @@ class Cart extends React.Component {
               key={ index }
               cartItensArray={ item }
             />
-          ))}
-
+          ))}            <Link to="/checkout" data-testid="checkout-products">
+          <button className="CartFinishBtn" type="button">Finalizar Compra</button>
+        </Link>
           </div>
 
           <div className="CartTotalDiv">
@@ -147,7 +148,6 @@ class Cart extends React.Component {
             </div>
             <Link to="/checkout" data-testid="checkout-products">
               <button className="CartFinishBtn" type="button">Finalizar Compra</button>
-
             </Link>
           </div>
         </div>
