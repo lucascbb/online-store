@@ -1,0 +1,114 @@
+.main-Review {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  padding: 40px 0;
+}
+
+.main-Review input {
+  background-color: rgb(220, 218, 218);
+  border: none;
+  border-radius: 6px;
+  padding: 12px 10px;
+}
+
+.main-Review textarea {
+  background-color: rgb(220, 218, 218);
+  border: none;
+  border-radius: 6px;
+  margin: 10px 0;
+  padding: 12px 10px;
+  resize: none;
+}
+
+.main-Review button {
+  background-color: #3483fa;
+  border: none;
+  border-radius: 6px;
+  box-shadow: 0 0 0 0 rgb(225, 225, 225);
+  color: white;
+  font-size: 16px;
+  font-weight: 900;
+  margin: 0 auto;
+  margin-top: 20px;
+  padding: 14px 16px;
+  text-align: center;
+  text-decoration: none;
+  width: 100%;
+}
+
+.msg-Review {
+  display: flex;
+  flex-direction: column;
+  margin-top: 10px;
+}
+
+.inputs-Review {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.inputs-Review:before {
+  align-items: center;
+  content: '\f005';
+  display: flex;
+  flex-direction: column;
+}
+
+.main-Rating {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: center;
+  margin: auto;
+  margin-top: 10px;
+  transform: scale(1.8);
+  width: 150px;
+}
+
+.main-Rating input {
+  display: none;
+}
+
+.main-Rating label {
+  color: #dbd8d8;
+  cursor: pointer;
+  float: right;
+  font-size: 24px;
+  margin-right: 5px;
+}
+
+.main-Rating input:checked ~ label {
+  color: rgb(223, 192, 18);
+}
+
+.comments {
+  background-color: rgb(246, 246, 246);
+  border-radius: 6px;
+  margin: 20px 0;
+  padding: 12px 14px;
+  width: 90%;
+}
+
+.comments h3 {
+  border-bottom: 2px solid black;
+  padding: 12px 14px;
+}
+
+.comment {
+  border-bottom: 1px solid black;
+  margin: 10px 0;
+}
+
+.comment div:first-child {
+  display: flex;
+  flex-direction: row-reverse;
+  left: 20px;
+  position: absolute;
+}
+
+.comment-Rating {
+  margin: -28px -10px;
+  position: relative;
+  transform: scale(0.5);
+}

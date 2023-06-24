@@ -2,7 +2,7 @@ import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import Principal from './Pages/Principal';
 import Cart from './Pages/Cart';
-import ProdutoDetalhado from './components/ProdutoDetalhado';
+import ProdutoDetalhado from './Pages/ProdutoDetalhado';
 import Checkout from './Pages/Checkout';
 // import { recuperaProdutos } from './localStorage/localStorage';
 
@@ -23,8 +23,10 @@ class Router extends React.Component {
           path="/checkout"
           component={ Checkout }
         />
-        <Route path="/produtoDetalhado/:id" component={ ProdutoDetalhado } />
-
+        <Route
+          path="/produtoDetalhado/:id"
+          component={ ProdutoDetalhado }
+        />
       </Switch>
     );
   }

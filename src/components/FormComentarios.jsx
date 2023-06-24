@@ -76,41 +76,47 @@ class FormComentarios extends React.Component {
   render() {
     const { email, ratingValue, textarea, invalidInput, arrayOfComments } = this.state;
     return (
-      <section>
+      <section className="main-Review">
+        <h3>Avaliação</h3>
         <form>
           {invalidInput && <p data-testid="error-msg">Campos inválidos</p>}
           <label htmlFor="email-input">
-            E-mail
             <input
               id="email-input"
               name="email"
               data-testid="product-detail-email"
+              placeholder="E-mail"
               value={ email }
               onChange={ this.handleChange }
             />
           </label>
           <Avaliacao ratingValue={ ratingValue } saveRating={ this.saveRating } />
-          <textarea
-            name="textarea"
-            data-testid="product-detail-evaluation"
-            placeholder="Mensagem (opcional)"
-            value={ textarea }
-            onChange={ this.handleChange }
-          />
-          <button
-            type="button"
-            data-testid="submit-review-btn"
-            onClick={ this.validateInputs }
-          >
-            Avaliar
-          </button>
+          <div className="msg-Review">
+            <textarea
+              name="textarea"
+              data-testid="product-detail-evaluation"
+              placeholder="Mensagem (opcional)"
+              value={ textarea }
+              onChange={ this.handleChange }
+            />
+            <button
+              type="button"
+              data-testid="submit-review-btn"
+              onClick={ this.validateInputs }
+            >
+              Avaliar
+            </button>
+          </div>
         </form>
         <div className="comments">
+          <h3>Comentários</h3>
           { arrayOfComments
           && arrayOfComments.map((ele, i) => (
             <div className="comment" key={ i }>
               <p data-testid="review-card-email">{ ele.email }</p>
-              <Avaliacao ratingValue={ ele.ratingValue } />
+              <div>
+                <Avaliacao ratingValue={ ele.ratingValue } className="star" />
+              </div>
               <p data-testid="review-card-evaluation">{ ele.textarea }</p>
             </div>
           ))}
