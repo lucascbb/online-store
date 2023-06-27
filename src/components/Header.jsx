@@ -47,6 +47,8 @@ function Header() {
     setMenu(false);
   };
 
+  console.log('teste');
+
   return (
     <header>
       <div className="pai-Header">

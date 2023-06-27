@@ -7,8 +7,16 @@ import { recuperaProdutos, SalvaProduto } from '../localStorage/localStorage';
 import { formatNumber } from '../Helpers/formatPrice';
 
 function Produto(props) {
-  const { productName, productPrice, productImage, categoryId,
-    productId, salvarQuantidade, freeShipping, objItem } = props;
+  const {
+    productName,
+    productPrice,
+    productImage,
+    categoryId,
+    productId,
+    salvarQuantidade,
+    freeShipping,
+    objItem,
+  } = props;
   const [productArray, setProductArray] = useState([]);
 
   useEffect(() => {
@@ -34,14 +42,14 @@ function Produto(props) {
 
   return (
     <div data-testid="product" className="paiProduto-Produto">
-      <button
+      {/* <button
         className="produtoButton"
         data-testid="product-add-to-cart"
         type="button"
         onClick={ handleAddToCart }
       >
         <FaCartPlus className="cartADD" />
-      </button>
+      </button> */}
       <Link
         className="produtoLink"
         to={ `/produtoDetalhado/${productId}` }
@@ -49,10 +57,8 @@ function Produto(props) {
         onClick={ () => localStorage.setItem('historico', categoryId) }
       >
         <img src={ productImage } alt={ productName } />
-        <p className="produtoName">{ productName }</p>
-        <p className="produtoPrice">
-          { formatNumber(productPrice) }
-        </p>
+        <p className="produtoName">{productName}</p>
+        <p className="produtoPrice">{formatNumber(productPrice)}</p>
       </Link>
       <div className="frete">
         {freeShipping && (
