@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './index.css';
+import './CSS/index.css';
+import './CSS/footer.css';
 import './CSS/itemCart.css';
 import './CSS/avaliacao.css';
 import './CSS/cart.css';

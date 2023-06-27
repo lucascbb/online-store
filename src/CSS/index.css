@@ -1,0 +1,16 @@
+body {
+  background-color: rgb(244, 244, 244);
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+
+  --1: #0f79ff;
+
+  --2: #2e8aff;
+
+  --3: #a36a00;
+
+  --4: #e8a120;
+}

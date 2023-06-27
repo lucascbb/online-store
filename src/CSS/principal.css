@@ -1,3 +1,4 @@
+/* stylelint-disable selector-max-specificity */
 /* stylelint-disable order/properties-alphabetical-order */
 
 @media ( min-width : 320px ) and ( max-width : 500px ) {
@@ -152,5 +153,33 @@
     width: 100%;
   }
 
+  .voltar-Principal {
+    align-items: center;
+    display: flex;
+    text-decoration: none;
+    margin: 10px;
+  }
 
+  .voltar-Principal :first-child {
+    font-size: 25px;
+    text-decoration: none;
+  }
+
+  #nenhumResultado {
+    display: flex;
+    justify-content: center;
+    position: relative;
+    bottom: 120px;
+    z-index: 1;
+    transition: bottom 2s;
+  }
+
+  #nenhumResultado p {
+    position: absolute;
+    border-radius: 6px;
+    background-color: rgb(229, 173, 173);
+    padding: 10px 12px;
+    z-index: 1;
+    color: black;
+  }
 }

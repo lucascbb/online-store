@@ -1,6 +1,6 @@
 /* eslint-disable react/jsx-max-depth */
 import React, { useState, useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { BsCart3 } from 'react-icons/bs';
 import { CgSearch } from 'react-icons/cg';
 import { MdMenu } from 'react-icons/md';
@@ -11,8 +11,8 @@ import bussines from '../images/business.png';
 import Categories from './Categories';
 
 function Header() {
+  const history = useHistory();
   const [campoDeBusca, setCampoDeBusca] = useState('');
-
   const [menu, setMenu] = useState(false);
   const { setResultado, setValor, setNenhumResultado } = useContext(ShopContext);
 
@@ -25,6 +25,7 @@ function Header() {
       setValor(true);
       setResultado(categories.results);
       setNenhumResultado(false);
+      history.push('/');
     }
     setCampoDeBusca('');
   };

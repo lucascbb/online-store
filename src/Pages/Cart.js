@@ -1,9 +1,9 @@
 import React from 'react';
-// import propTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import { TiArrowBackOutline } from 'react-icons/ti';
 import ItemCart from '../components/ItemCart';
 import { recuperaProdutos } from '../localStorage/localStorage';
-import arroyBack from '../CSS/images/icon _arrow back_.png';
 // import logo from '../CSS/images/logo.png';
 import Header from '../components/Header';
 
@@ -99,6 +99,11 @@ class Cart extends React.Component {
     localStorage.setItem('product', JSON.stringify(filtredArray));
   };
 
+  finish = () => {
+    const { history } = this.props;
+    history.push('/checkout');
+  };
+
   render() {
     const { temAlgo, cartArrayFiltred, total } = this.state;
     return (
@@ -106,10 +111,10 @@ class Cart extends React.Component {
         <Header />
         <Link
           to="/"
-          className="CartLinkBack"
+          className="voltar-ProdutoDetalhado"
         >
-          <img src={ arroyBack } alt="" />
-          <h4>Voltar</h4>
+          <TiArrowBackOutline />
+          Voltar
         </Link>
         <div className="CartSecondaryDiv">
           {!temAlgo && (
@@ -130,25 +135,26 @@ class Cart extends React.Component {
               key={ index }
               cartItensArray={ item }
             />
-          ))}            <Link to="/checkout" data-testid="checkout-products">
-          <button className="CartFinishBtn" type="button">Finalizar Compra</button>
-        </Link>
+          ))}
           </div>
-
           <div className="CartTotalDiv">
             <div className="CartSomaTotal">
-              <h1>Valor total da compra:</h1>
+              <h1>Valor total da compra</h1>
               <h3>
                 {total.toLocaleString(
                   'pt-br',
                   { style: 'currency', currency: 'BRL' },
                 )}
-
               </h3>
             </div>
-            <Link to="/checkout" data-testid="checkout-products">
-              <button className="CartFinishBtn" type="button">Finalizar Compra</button>
-            </Link>
+            <button
+              className="CartFinishBtn"
+              type="button"
+              onClick={ () => { this.finish(); } }
+              disabled={ localStorage.getItem('quantidade') <= 0 }
+            >
+              Finalizar Compra
+            </button>
           </div>
         </div>
       </div>
@@ -156,8 +162,10 @@ class Cart extends React.Component {
   }
 }
 
-// Cart.propTypes = {
-//   cartItensArray: propTypes.arrayOf.isRequired,
-// };
+Cart.propTypes = {
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired,
+  }).isRequired,
+};
 
 export default Cart;

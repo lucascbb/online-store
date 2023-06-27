@@ -8,10 +8,21 @@ function App() {
   const [resultado, setResultado] = useState('');
   const [valor, setValor] = useState(false);
   const [nenhumResultado, setNenhumResultado] = useState(false);
+  const [quantity, setQuantity] = useState(localStorage.getItem('quantidade'));
 
   return (
     <BrowserRouter>
-      <ShopContext.Provider value={ { resultado, setResultado, valor, setValor, nenhumResultado, setNenhumResultado } }>
+      <ShopContext.Provider
+        value={ { resultado,
+          setResultado,
+          valor,
+          setValor,
+          nenhumResultado,
+          setNenhumResultado,
+          quantity,
+          setQuantity,
+        } }
+      >
         <Routes />
       </ShopContext.Provider>
     </BrowserRouter>

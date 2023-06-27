@@ -24,6 +24,7 @@ class ItemCart extends React.Component {
   };
 
   aumentar = () => {
+    const { calculaTotaldoCarrinho } = this.props;
     this.setState(
       (prevState) => ({ quantidade: prevState.quantidade + 1 }),
       this.salvarLocalStorage,
@@ -35,6 +36,7 @@ class ItemCart extends React.Component {
   };
 
   diminuir = () => {
+    const { calculaTotaldoCarrinho } = this.props;
     this.setState((prevState) => {
       if (prevState.quantidade <= 1) {
         return { quantidade: 1 };
@@ -82,36 +84,41 @@ class ItemCart extends React.Component {
             X
           </button>
         </div>
+
         <img src={ thumbnail } alt={ title } />
-        <div className="ItemCartTitleDiv">
-          <p data-testid="shopping-cart-product-name">{title}</p>
-        </div>
-        <div className="ItemCartDivButtons">
-          <button
-            onClick={ () => { this.diminuir(); } }
-            data-testid="product-decrease-quantity"
-            type="button"
-          >
-            -
-          </button>
-          <p data-testid="shopping-cart-product-quantity">
-            {quantidade}
-          </p>
-          <button
-            onClick={ () => { this.aumentar(); } }
-            data-testid="product-increase-quantity"
-            type="button"
-          >
-            +
-          </button>
-        </div>
-        <div className="ItemCartDivPrice">
-          <p>
-            {`${price.toLocaleString(
-              'pt-br',
-              { style: 'currency', currency: 'BRL' },
-            )}`}
-          </p>
+
+        <div className="TitlePriceCart">
+          <div className="ItemCartTitleDiv">
+            <p data-testid="shopping-cart-product-name">{title}</p>
+          </div>
+
+          <div className="ItemCartDivButtons">
+            <button
+              onClick={ () => { this.diminuir(); } }
+              data-testid="product-decrease-quantity"
+              type="button"
+            >
+              -
+            </button>
+            <span data-testid="shopping-cart-product-quantity">
+              {quantidade}
+            </span>
+            <button
+              onClick={ () => { this.aumentar(); } }
+              data-testid="product-increase-quantity"
+              type="button"
+            >
+              +
+            </button>
+          </div>
+          <div className="ItemCartDivPrice">
+            <p>
+              {`${price.toLocaleString(
+                'pt-br',
+                { style: 'currency', currency: 'BRL' },
+              )}`}
+            </p>
+          </div>
         </div>
       </div>
     );

@@ -1,6 +1,7 @@
 /* eslint-disable react/jsx-max-depth */
 import React from 'react';
 import PropTypes from 'prop-types';
+import TextField from '@mui/material/TextField';
 import Header from '../components/Header';
 
 class Checkout extends React.Component {
@@ -39,8 +40,7 @@ class Checkout extends React.Component {
 
   finishOrder = () => {
     const { history } = this.props;
-    localStorage.removeItem('product');
-    localStorage.removeItem('productFiltred');
+    localStorage.clear();
     history.push('/');
   };
 
@@ -55,7 +55,7 @@ class Checkout extends React.Component {
     return (
       <>
         <Header />
-        <section>
+        <section className="main-Checkout">
           <div className="cart-products">
             <h3>Revise seus Produtos</h3>
             { product.map((ele) => <p key={ ele.id }>{ele.title}</p>) }
@@ -63,72 +63,78 @@ class Checkout extends React.Component {
           <div className="buyer-info">
             <h3>Informações do Comprador</h3>
             <form className="checkout-form">
-              <label
+              <TextField
+                id="standard-basic"
+                label="Nome Completo"
+                variant="standard"
                 htmlFor="fullname"
-              >
-                Nome Completo
-                <input
-                  name="fullname"
-                  data-testid="checkout-fullname"
-                  value={ fullname }
-                  onChange={ this.handleChange }
-                />
-              </label>
-              <label
+                value={ fullname }
+                onChange={ this.handleChange }
+                inputProps={ {
+                  name: 'fullname',
+                  'data-testid': 'checkout-fullname',
+                } }
+              />
+              <TextField
+                id="standard-basic"
+                label="Email"
+                variant="standard"
                 htmlFor="email"
-              >
-                Email
-                <input
-                  name="email"
-                  data-testid="checkout-email"
-                  value={ email }
-                  onChange={ this.handleChange }
-                />
-              </label>
-              <label
+                value={ email }
+                onChange={ this.handleChange }
+                inputProps={ {
+                  name: 'email',
+                  'data-testid': 'checkout-email',
+                } }
+              />
+              <TextField
+                id="standard-basic"
+                label="CPF"
+                variant="standard"
                 htmlFor="cpf"
-              >
-                CPF
-                <input
-                  name="cpf"
-                  value={ cpf }
-                  data-testid="checkout-cpf"
-                  onChange={ this.handleChange }
-                />
-              </label>
-              <label
+                value={ cpf }
+                onChange={ this.handleChange }
+                inputProps={ {
+                  name: 'cpf',
+                  'data-testid': 'checkout-cpf',
+                } }
+              />
+              <TextField
+                id="standard-basic"
+                label="Telefone"
+                variant="standard"
                 htmlFor="phone"
-              >
-                Telefone
-                <input
-                  name="phone"
-                  data-testid="checkout-phone"
-                  value={ phone }
-                  onChange={ this.handleChange }
-                />
-              </label>
-              <label
+                value={ phone }
+                onChange={ this.handleChange }
+                inputProps={ {
+                  name: 'phone',
+                  'data-testid': 'checkout-phone',
+                } }
+              />
+              <TextField
+                id="standard-basic"
+                label="CEP"
+                variant="standard"
                 htmlFor="cep"
-              >
-                CEP
-                <input
-                  name="cep"
-                  data-testid="checkout-cep"
-                  value={ cep }
-                  onChange={ this.handleChange }
-                />
-              </label>
-              <label
+                value={ cep }
+                onChange={ this.handleChange }
+                inputProps={ {
+                  name: 'cep',
+                  'data-testid': 'checkout-cep',
+                } }
+              />
+              <TextField
+                id="standard-basic"
+                label="Endereço"
+                variant="standard"
                 htmlFor="address"
-              >
-                Endereço
-                <input
-                  name="address"
-                  data-testid="checkout-address"
-                  value={ address }
-                  onChange={ this.handleChange }
-                />
-              </label>
+                value={ address }
+                onChange={ this.handleChange }
+                inputProps={ {
+                  name: 'address',
+                  'data-testid': 'checkout-address',
+                } }
+              />
             </form>
           </div>
           <div className="payment-metod">

@@ -1,75 +1,78 @@
-.Cart-Header {
-  background-color: #003be5;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
-  display: flex;
-  height: 100px;
-  justify-content: center;
-  text-align: center;
-}
-
-.Cart-Header img {
-  padding: 15px;
-}
-
-.Cart-CartItensDiv {
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
-  margin-left: 2%;
-  margin-top: 50px;
-  padding: 30px;
-  width: 45%;
-}
-
-.Cart-Title {
-  font-size: 24px;
-  margin-bottom: 50px;
-  text-align: center;
-}
-
-.CartLinkBack {
-  align-items: center;
-  color: #2fc18c;
-  display: flex;
-  height: 35px;
-  padding: 20px;
-  text-decoration: none;
-  width: 90px;
-}
-
-.CartLinkBack img {
-  height: 20px;
-  margin: 5px;
-  width: 20px;
-}
-
 .CartSecondaryDiv {
-
-  /* background-color: #003be5; */
+  background-color: white;
   display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-top: 10px;
+  padding: 14px 12px;
 }
 
 .CartTotalDiv {
-  align-items: center;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
-  margin-left: 180px;
+  padding: 14px 0;
 }
 
-.CartSomaTotal {
-  align-items: center;
-  display: flex;
-  flex-direction: column;
+.CartSomaTotal h3 {
+  padding: 14px 12px;
 }
 
-.CartFinishBtn {
-  background: #31c28d;
-  border: none;
+.ItemCartDivRemoveButton button {
+  all: unset;
+  color: brown;
+  padding: 0 5px;
+}
+
+/* Item Cart */
+.ItemCartDivPrincipal {
+  align-items: center;
+  display: flex;
+}
+
+.ItemCartDivPrincipal img {
+  height: 100px;
+  width: 100px;
+}
+
+.TitlePriceCart {
+  display: flex;
+  flex-direction: column;
+  width: 180px;
+}
+
+.ItemCartTitleDiv p {
+  font-size: 12px;
+  padding: 0 10px;
+  width: 180px;
+}
+
+.ItemCartDivButtons {
+  align-items: center;
+  display: flex;
+  margin: -12px 0 0;
+  padding: 0 5px;
+}
+
+.ItemCartDivButtons button {
+  all: unset;
+  margin: 0 10px;
+}
+
+.ItemCartDivPrice p {
+  padding: 0 6px;
+}
+
+/* VALOR TOTAL */
+.LinkBtn {
+  text-decoration: none;
+}
+
+.CartTotalDiv button {
+  all: unset;
+  background-color: var(--1);
+  border-radius: 6px;
   color: white;
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 600;
-  height: 38.63px;
-  line-height: 16px;
-  text-align: center;
-  width: 244.65px;
+  padding: 10px 14px;
+}
+
+.CartTotalDiv button:disabled {
+  filter: grayscale(0.4) opacity(0.4);
 }

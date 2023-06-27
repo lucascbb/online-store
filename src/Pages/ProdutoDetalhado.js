@@ -30,40 +30,7 @@ class ProdutoDetalhado extends React.Component {
     const produtoDetalhado = await getProductById(id);
     this.setState({ product: [produtoDetalhado], loading: false, id });
     this.calculaTotal();
-    console.log(produtoDetalhado.shipping);
-    console.log(produtoDetalhado.original_price);
-    console.log(produtoDetalhado.price);
   }
-
-  // onBuy = () => {
-  //   const { product } = this.state;
-
-  //   const idQuantidade = `quantidade:${product[0].id}`;
-  //   this.salvarQuantidade(idQuantidade);
-
-  //   const res = localStorage.getItem('quantidade');
-  //   localStorage.setItem('quantidade', Number(res) + 1);
-
-  //   const produto = product;
-  //   const produtos = recuperaProdutos();
-  //   if (produtos !== null) {
-  //     const [produtoObj] = produto;
-  //     produtos.push(produtoObj);
-  //     this.setState({
-  //       produtosSalvos: produtos,
-  //     }, () => {
-  //       const { produtosSalvos } = this.state;
-  //       SalvaProduto(produtosSalvos);
-  //     });
-  //   } else {
-  //     this.setState({
-  //       produtosSalvos: produto,
-  //     }, () => {
-  //       const { produtosSalvos } = this.state;
-  //       SalvaProduto(produtosSalvos);
-  //     });
-  //   }
-  // };
 
   onClickButton = () => {
     const { product } = this.state;
@@ -107,7 +74,6 @@ class ProdutoDetalhado extends React.Component {
 
   calculaTotal = () => {
     const listaDeItens = JSON.parse(localStorage.getItem('product'));
-
     if (listaDeItens != null) {
       const setArray = new Set();
       const filtredArray = listaDeItens.filter((item) => {
@@ -149,7 +115,7 @@ class ProdutoDetalhado extends React.Component {
         },
       ],
     };
-    const { product, loading, id, quantidadeCarrinho } = this.state;
+    const { product, loading, id } = this.state;
     return (
       <div>
         <Header />
