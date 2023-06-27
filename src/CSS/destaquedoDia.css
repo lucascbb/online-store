@@ -75,4 +75,92 @@
     overflow: hidden;
     text-overflow: ellipsis;
   }
+
+  .saleprice-DestaquedoDia {
+    color: grey;
+    font-size: 12px;
+  }
+}
+
+@media ( min-width : 501px ) and ( max-width : 800px ) {
+
+  .main-DestaquedoDia {
+    align-items: center;
+    background-color: white;
+    border-radius: 6px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    margin: 35px 10px 0;
+    padding: 5px 0 10px;
+    width: 90%;
+  }
+
+  .main-DestaquedoDia h3 {
+    padding: 10px;
+  }
+
+  .cada-DestaquedoDia {
+    align-items: center;
+    border-bottom: 1px solid rgb(244, 244, 244);
+    color: black;
+    display: flex;
+    text-decoration: none;
+  }
+
+  .cada-DestaquedoDia:first-child {
+    border-top: 1px solid rgb(244, 244, 244);
+  }
+
+  .cada-DestaquedoDia img {
+    height: 110px;
+    padding: 6px 4px;
+  }
+
+  .cada-DestaquedoDia article {
+    display: flex;
+    flex-direction: column;
+    padding: 5px;
+  }
+
+  .mainFrete-DestaquedoDia {
+    position: absolute;
+    right: 60px;
+  }
+
+  .frete-DestaquedoDia {
+    align-items: center;
+    color: rgb(73, 159, 23);
+    display: flex;
+    font-size: 16px;
+    position: relative;
+    right: 0;
+    top: 45px;
+  }
+
+  .iconTruck-DestaquedoDia {
+    font-size: 18px;
+    margin: 0 0 0 5px;
+  }
+
+  .title-DestaquedoDia {
+    -webkit-box-orient: vertical;
+    display: -webkit-box;
+    font-size: 12px;
+    -webkit-line-clamp: 2;
+    max-width: 320px;
+    overflow: hidden;
+  }
+
+  .price-DestaquedoDia {
+    font-size: 18px;
+    height: 30px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .saleprice-DestaquedoDia {
+    color: grey;
+    font-size: 12px;
+  }
 }

@@ -43,6 +43,7 @@ class Historico extends React.Component {
       listSales,
       categoryId,
     });
+    console.log(listSales.map((ele) => ele.original_price));
   };
 
   render() {
@@ -62,6 +63,10 @@ class Historico extends React.Component {
                 <img src={ product.thumbnail } alt={ product.title } />
                 <article>
                   <p className="title-DestaquedoDia">{product.title}</p>
+                  {product.original_price && (
+                    <s className="saleprice-DestaquedoDia">
+                      { formatNumber(product.original_price) }
+                    </s>)}
                   <p className="price-DestaquedoDia">
                     { formatNumber(product.price) }
                   </p>

@@ -39,6 +39,7 @@ class DestaquedoDia extends React.Component {
     this.setState({
       listSales,
     });
+    console.log(listSales.map((ele) => ele.original_price));
   };
 
   render() {
@@ -48,7 +49,7 @@ class DestaquedoDia extends React.Component {
       <section className="main-DestaquedoDia">
         <h3>Destaques do dia</h3>
         <article className="lista-DestaquedoDia">
-          {listSales.length === 0 ? <Loading />
+          {listSales[0] === undefined ? <Loading />
             : listSales.map((product) => (
               <Link
                 to={ `/produtoDetalhado/${product.id}` }
@@ -59,6 +60,10 @@ class DestaquedoDia extends React.Component {
                 <img src={ product.thumbnail } alt={ product.title } />
                 <article>
                   <p className="title-DestaquedoDia">{product.title}</p>
+                  {product.original_price && (
+                    <s className="saleprice-DestaquedoDia">
+                      { formatNumber(product.original_price) }
+                    </s>)}
                   <p className="price-DestaquedoDia">
                     { formatNumber(product.price) }
                   </p>
