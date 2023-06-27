@@ -29,7 +29,6 @@ class ProdutoDetalhado extends React.Component {
     const { match: { params: { id } } } = this.props;
     const produtoDetalhado = await getProductById(id);
     this.setState({ product: [produtoDetalhado], loading: false, id });
-    // this.calculaTotal();
   }
 
   onClickButton = () => {

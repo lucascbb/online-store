@@ -48,7 +48,7 @@ class DestaquedoDia extends React.Component {
       <section className="main-DestaquedoDia">
         <h3>Destaques do dia</h3>
         <article className="lista-DestaquedoDia">
-          {listSales.length <= 0 ? <Loading />
+          {listSales.length === 0 ? <Loading />
             : listSales.map((product) => (
               <Link
                 to={ `/produtoDetalhado/${product.id}` }

@@ -1,78 +1,81 @@
-.CartSecondaryDiv {
-  background-color: white;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  margin-top: 10px;
-  padding: 14px 12px;
-}
+@media ( min-width : 320px ) and ( max-width : 500px ) {
 
-.CartTotalDiv {
-  padding: 14px 0;
-}
+  .CartSecondaryDiv {
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-top: 10px;
+    padding: 14px 12px;
+  }
 
-.CartSomaTotal h3 {
-  padding: 14px 12px;
-}
+  .CartTotalDiv {
+    padding: 14px 0;
+  }
 
-.ItemCartDivRemoveButton button {
-  all: unset;
-  color: brown;
-  padding: 0 5px;
-}
+  .CartSomaTotal h3 {
+    padding: 14px 12px;
+  }
 
-/* Item Cart */
-.ItemCartDivPrincipal {
-  align-items: center;
-  display: flex;
-}
+  .ItemCartDivRemoveButton button {
+    all: unset;
+    color: brown;
+    padding: 0 5px;
+  }
 
-.ItemCartDivPrincipal img {
-  height: 100px;
-  width: 100px;
-}
+  /* Item Cart */
+  .ItemCartDivPrincipal {
+    align-items: center;
+    display: flex;
+  }
 
-.TitlePriceCart {
-  display: flex;
-  flex-direction: column;
-  width: 180px;
-}
+  .ItemCartDivPrincipal img {
+    height: 100px;
+    width: 100px;
+  }
 
-.ItemCartTitleDiv p {
-  font-size: 12px;
-  padding: 0 10px;
-  width: 180px;
-}
+  .TitlePriceCart {
+    display: flex;
+    flex-direction: column;
+    width: 180px;
+  }
 
-.ItemCartDivButtons {
-  align-items: center;
-  display: flex;
-  margin: -12px 0 0;
-  padding: 0 5px;
-}
+  .ItemCartTitleDiv p {
+    font-size: 12px;
+    padding: 0 10px;
+    width: 180px;
+  }
 
-.ItemCartDivButtons button {
-  all: unset;
-  margin: 0 10px;
-}
+  .ItemCartDivButtons {
+    align-items: center;
+    display: flex;
+    margin: -12px 0 0;
+    padding: 0 5px;
+  }
 
-.ItemCartDivPrice p {
-  padding: 0 6px;
-}
+  .ItemCartDivButtons button {
+    all: unset;
+    margin: 0 10px;
+  }
 
-/* VALOR TOTAL */
-.LinkBtn {
-  text-decoration: none;
-}
+  .ItemCartDivPrice p {
+    padding: 0 6px;
+  }
 
-.CartTotalDiv button {
-  all: unset;
-  background-color: var(--1);
-  border-radius: 6px;
-  color: white;
-  padding: 10px 14px;
-}
+  /* VALOR TOTAL */
+  .LinkBtn {
+    text-decoration: none;
+  }
 
-.CartTotalDiv button:disabled {
-  filter: grayscale(0.4) opacity(0.4);
+  .CartTotalDiv button {
+    all: unset;
+    background-color: var(--1);
+    border-radius: 6px;
+    color: white;
+    padding: 10px 14px;
+  }
+
+  .CartTotalDiv button:disabled {
+    filter: grayscale(0.4) opacity(0.4);
+  }
 }

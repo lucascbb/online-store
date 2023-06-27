@@ -1,45 +1,48 @@
-.main-Checkout {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: 12px 16px;
-}
+@media ( min-width : 320px ) and ( max-width : 500px ) {
 
-.main-Checkout button {
-  all: unset;
-  background-color: var(--1);
-  border-radius: 6px;
-  color: white;
-  padding: 10px 14px;
-  text-align: center;
-}
+  .main-Checkout {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 12px 16px;
+  }
 
-.main-Checkout button:disabled {
-  filter: grayscale(0.4) opacity(0.4);
-}
+  .main-Checkout button {
+    all: unset;
+    background-color: var(--1);
+    border-radius: 6px;
+    color: white;
+    padding: 10px 14px;
+    text-align: center;
+  }
 
-.checkout-form {
-  align-items: center;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
+  .main-Checkout button:disabled {
+    filter: grayscale(0.4) opacity(0.4);
+  }
 
-.checkout-form * {
-  margin: 0 0 5px;
-  padding: 0 10px;
-}
+  .checkout-form {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
 
-.payment-metod {
-  margin: 30px 0 20px;
-}
+  .checkout-form * {
+    margin: 0 0 5px;
+    padding: 0 10px;
+  }
 
-.payment-metod label {
-  display: flex;
-  margin: 3px 10px;
-}
+  .payment-metod {
+    margin: 30px 0 20px;
+  }
 
-.payment-metod input {
-  display: flex;
-  margin: 0 5px;
+  .payment-metod label {
+    display: flex;
+    margin: 3px 10px;
+  }
+
+  .payment-metod input {
+    display: flex;
+    margin: 0 5px;
+  }
 }
