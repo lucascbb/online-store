@@ -25,6 +25,8 @@ https://online-store-three-bice.vercel.app/
 
 ## Demonstração
 
+<img src="/src/images/mobile.gif" alt="gif mobile site">
+<img src="/src/images/tablet.gif" alt="gif tablet site">
 
 ## Instalação
 

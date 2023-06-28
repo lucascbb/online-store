@@ -16,7 +16,8 @@ function Header() {
   const [menu, setMenu] = useState(false);
   const { setResultado, setValor, setNenhumResultado } = useContext(ShopContext);
 
-  const handleClick = async () => {
+  const handleClick = async (event) => {
+    event.preventDefault();
     const categories = await getProductsFromCategoryAndQuery(false, campoDeBusca);
     if (categories.results.length === 0) {
       setValor(false);
@@ -30,7 +31,7 @@ function Header() {
     setCampoDeBusca('');
   };
 
-  const onChange = (event) => {
+  const handleChange = (event) => {
     const { value } = event.target;
     setCampoDeBusca(value);
   };
@@ -56,12 +57,18 @@ function Header() {
             onClick={ toggleMenu }
             className={ menu ? 'btnMenu-Header' : 'btnMenu-Header2' }
           >
-            {menu ? <IoMdClose
-              className="iconMenu-Header"
-            /> : <MdMenu className="iconMenu-Header" />}
+            {menu ? (
+              <IoMdClose className="iconMenu-Header" />
+            ) : (
+              <MdMenu className="iconMenu-Header" />
+            )}
           </button>
 
-          <Link className="logo-Header" to="/" onClick={ () => setValor(false) }>
+          <Link
+            className="logo-Header"
+            to="/"
+            onClick={ () => setValor(false) }
+          >
             <img src={ bussines } alt="logo" />
           </Link>
 
@@ -71,7 +78,10 @@ function Header() {
                 <>
                   <BsCart3 className="iconCart-Header" />
                   {localStorage.getItem('quantidade') > 0 ? (
-                    <p data-testid="shopping-cart-size" className="numCart-Header">
+                    <p
+                      data-testid="shopping-cart-size"
+                      className="numCart-Header"
+                    >
                       {localStorage.getItem('quantidade')}
                     </p>
                   ) : null}
@@ -82,27 +92,27 @@ function Header() {
         </div>
 
         <div className="search-Header">
-          <label htmlFor="principalButton" className="label-Header">
-            <input
-              value={ campoDeBusca }
-              onChange={ onChange }
-              name="campoDeBusca"
-              placeholder="Busca aqui"
-              type="text"
-              data-testid="query-input"
-              id="principalButton"
-            />
-            <button
-              id="principalButton"
-              type="button"
-              data-testid="query-button"
-              disabled={ campoDeBusca === '' }
-              onClick={ handleClick }
-            >
-              <CgSearch />
-            </button>
-            {/* </Link> */}
-          </label>
+          <form onSubmit={ handleClick }>
+            <label htmlFor="principalButton" className="label-Header">
+              <input
+                value={ campoDeBusca }
+                onChange={ handleChange }
+                name="campoDeBusca"
+                placeholder="Busca aqui"
+                type="text"
+                data-testid="query-input"
+                id="principalButton"
+              />
+              <button
+                id="principalButton"
+                type="submit"
+                data-testid="query-button"
+                disabled={ campoDeBusca === '' }
+              >
+                <CgSearch />
+              </button>
+            </label>
+          </form>
         </div>
         <div className="categories-vertical">
           <Categories open={ menu } getProducts={ getCategorieProducts } />
