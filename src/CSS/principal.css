@@ -515,7 +515,6 @@
     display: flex;
     flex-flow: row wrap;
     justify-content: center;
-    flex-direction: column;
   }
 
   .teste {
@@ -533,6 +532,8 @@
     display: flex;
     text-decoration: none;
     margin: 10px;
+    margin-left: 4%;
+    width: 80px;
   }
 
   .voltar-Principal :first-child {
