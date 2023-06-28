@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
@@ -19,7 +18,9 @@ function Produto(props) {
     freeShipping,
     objItem,
   } = props;
-  const [setProductArray] = useState([]);
+
+  // eslint-disable-next-line no-unused-vars
+  const [productArray, setProductArray] = useState([]);
 
   useEffect(() => {
     setProductArray(objItem);
