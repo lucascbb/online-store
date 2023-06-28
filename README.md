@@ -25,8 +25,13 @@ https://online-store-three-bice.vercel.app/
 
 ## Demonstração
 
-<img src="/src/images/mobile.gif" alt="gif mobile site">
-<img src="/src/images/tablet.gif" alt="gif tablet site">
+<!-- ![gif mobile site](/src/images/mobile.gif)
+![gif mobile site](/src/images/tablet.gif) -->
+
+<div>
+  <img src="./src/images/mobile.gif" alt="gif mobile site" width="250px">
+  <img src="./src/images/tablet.gif" alt="gif tablet site" width="360px">
+</div>
 
 ## Instalação
 
