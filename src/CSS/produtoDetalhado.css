@@ -310,8 +310,9 @@
   .voltar-ProdutoDetalhado {
     align-items: center;
     display: flex;
-    margin-left: 10px;
+    margin-left: 11%;
     text-decoration: none;
+    width: 80px;
   }
 
   .voltar-ProdutoDetalhado :first-child {
