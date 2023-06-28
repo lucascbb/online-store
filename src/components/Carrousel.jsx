@@ -36,7 +36,7 @@ class Carrousel extends React.Component {
       autoplaySpeed: 3000,
       responsive: [
         {
-          breakpoint: 500,
+          breakpoint: 800,
           settings: {
             slidesToShow: 1,
             slidesToScroll: 1,

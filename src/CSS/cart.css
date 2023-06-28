@@ -1,3 +1,5 @@
+/* stylelint-disable value-no-vendor-prefix */
+
 @media ( min-width : 320px ) and ( max-width : 500px ) {
 
   .CartSecondaryDiv {
@@ -60,6 +62,98 @@
 
   .ItemCartDivPrice p {
     padding: 0 6px;
+  }
+
+  /* VALOR TOTAL */
+  .LinkBtn {
+    text-decoration: none;
+  }
+
+  .CartTotalDiv button {
+    all: unset;
+    background-color: var(--1);
+    border-radius: 6px;
+    color: white;
+    padding: 10px 14px;
+  }
+
+  .CartTotalDiv button:disabled {
+    filter: grayscale(0.4) opacity(0.4);
+  }
+}
+
+@media ( min-width : 501px ) and ( max-width : 800px ) {
+
+  .CartSecondaryDiv {
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-top: 10px;
+    padding: 14px 12px;
+  }
+
+  .CartTotalDiv {
+    padding: 14px 12px;
+  }
+
+  .CartSomaTotal h3 {
+    padding: 14px 12px;
+  }
+
+  .ItemCartDivRemoveButton button {
+    all: unset;
+    color: brown;
+    font-size: 25px;
+    padding: 0 5px;
+  }
+
+  .Cart-Title {
+    padding: 5px 12px;
+  }
+
+  /* Item Cart */
+  .ItemCartDivPrincipal {
+    align-items: center;
+    display: flex;
+  }
+
+  .ItemCartDivPrincipal img {
+    height: 120px;
+    width: 120px;
+  }
+
+  .TitlePriceCart {
+    display: flex;
+    flex-direction: column;
+    width: 180px;
+  }
+
+  .ItemCartTitleDiv p {
+    -webkit-box-orient: vertical;
+    display: -webkit-box;
+    font-size: 13px;
+    -webkit-line-clamp: 3;
+    max-height: 60px;
+    overflow: hidden;
+    padding: 0 10px;
+    width: 320px;
+  }
+
+  .ItemCartDivButtons {
+    align-items: center;
+    display: flex;
+    margin: -12px 0 5px;
+  }
+
+  .ItemCartDivButtons button {
+    all: unset;
+    margin: 0 10px;
+  }
+
+  .ItemCartDivPrice p {
+    font-size: 18px;
+    padding: 0 10px;
   }
 
   /* VALOR TOTAL */

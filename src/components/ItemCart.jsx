@@ -1,5 +1,7 @@
 import React from 'react';
 import propTypes from 'prop-types';
+import { AiOutlineDelete } from 'react-icons/ai';
+import { IoMdAddCircle, IoMdRemoveCircle } from 'react-icons/io';
 
 class ItemCart extends React.Component {
   constructor() {
@@ -81,7 +83,7 @@ class ItemCart extends React.Component {
             data-testid="remove-product"
             type="button"
           >
-            X
+            <AiOutlineDelete />
           </button>
         </div>
 
@@ -98,7 +100,7 @@ class ItemCart extends React.Component {
               data-testid="product-decrease-quantity"
               type="button"
             >
-              -
+              <IoMdRemoveCircle />
             </button>
             <span data-testid="shopping-cart-product-quantity">
               {quantidade}
@@ -108,7 +110,7 @@ class ItemCart extends React.Component {
               data-testid="product-increase-quantity"
               type="button"
             >
-              +
+              <IoMdAddCircle />
             </button>
           </div>
           <div className="ItemCartDivPrice">
