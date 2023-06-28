@@ -66,6 +66,7 @@ function Principal() {
                 objItem={ ele }
                 key={ ele.id }
                 productName={ ele.title }
+                productOriginalPrice={ ele.original_price }
                 productPrice={ ele.price }
                 productImage={ ele.thumbnail }
                 productId={ ele.id }

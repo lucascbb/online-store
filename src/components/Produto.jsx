@@ -10,6 +10,7 @@ function Produto(props) {
   const {
     productName,
     productPrice,
+    productOriginalPrice,
     productImage,
     categoryId,
     productId,
@@ -58,6 +59,8 @@ function Produto(props) {
       >
         <img src={ productImage } alt={ productName } />
         <p className="produtoName">{productName}</p>
+        {productOriginalPrice
+          && <s className="produtoOriginalPrice">{formatNumber(productPrice)}</s>}
         <p className="produtoPrice">{formatNumber(productPrice)}</p>
       </Link>
       <div className="frete">
