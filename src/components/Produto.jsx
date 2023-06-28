@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import { FaCartPlus } from 'react-icons/fa';
+// import { FaCartPlus } from 'react-icons/fa';
 import { TbTruckDelivery } from 'react-icons/tb';
-import { recuperaProdutos, SalvaProduto } from '../localStorage/localStorage';
+// import { recuperaProdutos, SalvaProduto } from '../localStorage/localStorage';
 import { formatNumber } from '../Helpers/formatPrice';
 
 function Produto(props) {
@@ -14,32 +14,32 @@ function Produto(props) {
     productImage,
     categoryId,
     productId,
-    salvarQuantidade,
+    // salvarQuantidade,
     freeShipping,
     objItem,
   } = props;
-  const [productArray, setProductArray] = useState([]);
+  // const [productArray, setProductArray] = useState([]);
 
   useEffect(() => {
     setProductArray(objItem);
   }, [objItem]);
 
-  const handleAddToCart = () => {
-    const idQuantidade = `quantidade:${objItem.id}`;
+  // const handleAddToCart = () => {
+  //   const idQuantidade = `quantidade:${objItem.id}`;
 
-    const recupera = recuperaProdutos();
+  //   const recupera = recuperaProdutos();
 
-    const res = localStorage.getItem('quantidade');
-    localStorage.setItem('quantidade', Number(res) + 1);
+  //   const res = localStorage.getItem('quantidade');
+  //   localStorage.setItem('quantidade', Number(res) + 1);
 
-    if (recupera !== null) {
-      recupera.push(productArray);
-      SalvaProduto(recupera);
-    } else {
-      SalvaProduto([productArray]);
-    }
-    salvarQuantidade(idQuantidade);
-  };
+  //   if (recupera !== null) {
+  //     recupera.push(productArray);
+  //     SalvaProduto(recupera);
+  //   } else {
+  //     SalvaProduto([productArray]);
+  //   }
+  //   salvarQuantidade(idQuantidade);
+  // };
 
   return (
     <div data-testid="product" className="paiProduto-Produto">
