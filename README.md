@@ -25,12 +25,9 @@ https://online-store-three-bice.vercel.app/
 
 ## Demonstração
 
-<!-- ![gif mobile site](/src/images/mobile.gif)
-![gif mobile site](/src/images/tablet.gif) -->
-
 <div>
-  <img src="./src/images/mobile.gif" alt="gif mobile site" width="250px">
-  <img src="./src/images/tablet.gif" alt="gif tablet site" width="360px">
+  <img src="https://github.com/lucascbb/online-store/assets/108954192/41272377-62c4-4b93-90fd-6a53cff1a193" alt="gif mobile site" width="250px">
+  <img src="https://github.com/lucascbb/online-store/assets/108954192/684c6b5c-4573-4a3a-98f8-a88d5fdf0564" alt="gif tablet site" width="360px">
 </div>
 
 ## Instalação
