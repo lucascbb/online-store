@@ -39,7 +39,6 @@ class DestaquedoDia extends React.Component {
     this.setState({
       listSales,
     });
-    console.log(listSales.map((ele) => ele.original_price));
   };
 
   render() {

@@ -43,7 +43,6 @@ class Historico extends React.Component {
       listSales,
       categoryId,
     });
-    console.log(listSales.map((ele) => ele.original_price));
   };
 
   render() {
